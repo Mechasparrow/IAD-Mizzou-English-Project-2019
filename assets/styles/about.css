@@ -7,3 +7,7 @@
 .about .writing {
   font-size: 1.75em;
 }
+
+.about .card {
+  padding: 32px;
+}
