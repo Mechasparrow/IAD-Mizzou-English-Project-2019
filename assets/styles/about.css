@@ -1,0 +1,9 @@
+/* About CSS */
+.about .title {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.about .writing {
+  font-size: 1.75em;
+}
