@@ -1,0 +1,9 @@
+/* About CSS */
+.resources .title {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.resource-cards {
+  margin-top: 32px;
+}
