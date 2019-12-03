@@ -102,6 +102,27 @@ function renderQuestions(quizContainer, questions) {
   })
 }
 
+function pullQuestionScore(scoreIdx) {
+  let radioValue = $("input[name='" + "radio-question-" + scoreIdx.toString() + "']:checked").val();
+
+  if (radioValue) {
+    return parseInt(radioValue, 10);
+  }else {
+    return 0;
+  }
+}
+
+function pullQuestionScores(questions) {
+  let questionScores = [];
+
+  questions.map(function (elem, idx) {
+    let questionScore = pullQuestionScore(idx+1);
+    questionScores[idx] = questionScore;
+  });
+
+  return questionScores;
+}
+
 
 $(document).ready(function () {
 
@@ -114,5 +135,15 @@ $(document).ready(function () {
   var quizContainer = $("#quiz");
 
   renderQuestions(quizContainer, questions);
+
+  //Button submit event
+  var quizBtn = $("#quiz-submit ");
+  quizBtn.click(function (e) {
+    console.log("Submitted!");
+    let questionScores = pullQuestionScores(questions);
+
+    console.log("Scores!:");
+    console.log(questionScores);
+  })
 
 })
