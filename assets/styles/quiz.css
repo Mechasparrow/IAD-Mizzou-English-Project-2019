@@ -1,0 +1,26 @@
+/** Quiz CSS **/
+
+/** Questions **/
+.question-text {
+  font-weight: bold;
+}
+
+/** Question options **/
+
+.optionContainer {
+  margin-bottom: 8px;
+}
+
+.likert-text {
+  display:inline;
+  padding-left: 8px;
+}
+
+/** Submission **/
+#quiz-submit .btn {
+  color: white !important;
+}
+
+#quiz-submit {
+  margin-bottom: 16px;
+}
