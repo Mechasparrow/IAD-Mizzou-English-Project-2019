@@ -78,9 +78,14 @@ function renderQuestion(questionString, questionId) {
     let optVal = (i+1);
     radioOpt.attr("value", optVal);
 
+    if (i==0){
+      radioOpt.attr("checked", "true");
+    }
+
     let likertOpt = likertOptions[i];
     let likertElem = $("<p></p>").text(likertOpt);
     likertElem.addClass("likert-text");
+
 
     //Add to the radio opt container
     radioOptContainer.append(radioOpt);
@@ -123,6 +128,31 @@ function pullQuestionScores(questions) {
   return questionScores;
 }
 
+function displayQuizSubScores(questionScores) {
+
+  //DEbug code
+  questionScores.map(function (score, idx) {
+    let questionNum = idx + 1;
+    console.log(questionNum + ") " + score.toString());
+  })
+
+
+  //Compute scores
+  let obssessionScore = 0;
+  let neglectScore = 0;
+  let controlScore = 0;
+
+  for (let i = 0; i < questionScores.length; i+=3) {
+    obssessionScore += questionScores[i];
+    neglectScore += questionScores[i+1];
+    controlScore += questionScores[i+2];
+  }
+
+  $("#obession-display").text("Obsession: " + obssessionScore );
+  $("#neglect-display").text("Neglect: " + neglectScore);
+  $("#control-display").text("Control: " + controlScore);
+}
+
 
 $(document).ready(function () {
 
@@ -133,17 +163,30 @@ $(document).ready(function () {
   var questions = retrieveQuestions()["questions"];
 
   var quizContainer = $("#quiz");
+  var quizResultsContainer = $("#quiz-results");
+  quizResultsContainer.hide();
 
   renderQuestions(quizContainer, questions);
 
   //Button submit event
   var quizBtn = $("#quiz-submit ");
+
+  var questionScores;
   quizBtn.click(function (e) {
     console.log("Submitted!");
-    let questionScores = pullQuestionScores(questions);
+    questionScores = pullQuestionScores(questions);
 
-    console.log("Scores!:");
-    console.log(questionScores);
+    quizContainer.hide();
+    quizBtn.hide();
+    quizResultsContainer.show();
+
+    displayQuizSubScores(questionScores);
+
   })
+
+  var resetQuizBtn = $("#quiz-reset");
+  resetQuizBtn.click(function(e) {
+    location.reload();
+  });
 
 })
