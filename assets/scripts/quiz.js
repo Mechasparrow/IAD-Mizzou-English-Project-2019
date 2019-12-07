@@ -148,7 +148,7 @@ function displayQuizSubScores(questionScores) {
     controlScore += questionScores[i+2];
   }
 
-  $("#obession-display").text("Obsession: " + obssessionScore );
+  $("#obsession-display").text("Obsession: " + obssessionScore );
   $("#neglect-display").text("Neglect: " + neglectScore);
   $("#control-display").text("Control: " + controlScore);
 }
